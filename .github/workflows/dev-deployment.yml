@@ -40,6 +40,9 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASS }}
           script: |
+            set +o history
+            echo ${{ secrets.WORKFLOW_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            set -o history
             docker pull $DOCKER_IMAGE:$DOCKER_TAG
             docker stop spring-admin-dev || true
             docker rm spring-admin-dev || true
