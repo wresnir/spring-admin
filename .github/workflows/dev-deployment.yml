@@ -23,7 +23,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.WORKFLOW_TOKEN }}
 
-      - name: Debug befor build
+      - name: Debug before build
         run: |
           pwd
           ls -l
