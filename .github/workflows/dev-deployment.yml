@@ -6,7 +6,7 @@ name: Maven Package
 on:
   push:
     branches:
-      - dev
+      - dev-wresni
 
 jobs:
   build:
@@ -43,6 +43,9 @@ jobs:
             set +o history
             echo ${{ secrets.WORKFLOW_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             set -o history
+            echo "Image: $DOCKER_IMAGE"
+            echo "Tag: $DOCKER_TAG"
+            echo "Image Tag: DOCKER_IMAGE:$DOCKER_TAG"
             docker pull $DOCKER_IMAGE:$DOCKER_TAG
             docker stop spring-admin-dev || true
             docker rm spring-admin-dev || true
