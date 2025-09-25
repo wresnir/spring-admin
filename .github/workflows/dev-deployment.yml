@@ -6,7 +6,7 @@ name: Maven Package
 on:
   push:
     branches:
-      - dev
+      - dev-wresni
 
 jobs:
   build:
@@ -22,6 +22,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.WORKFLOW_TOKEN }}
+
+      - name: Debug befor build
+        run: |
+          pwd
+          ls -l
 
       - name: Build and push Docker image
         run: |
