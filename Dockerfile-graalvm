@@ -1,0 +1,11 @@
+FROM ghcr.io/graalvm/graalvm-community:17 AS builder
+WORKDIR /app
+COPY . .
+RUN ./mvnw -Pnative native:compile -DskipTests
+
+FROM debian:bookworm-slim AS runner
+WORKDIR /app
+COPY --from=builder /app/target/spring-admin .
+RUN chmod +x spring-admin
+EXPOSE 9090
+ENTRYPOINT ["./spring-admin"]
